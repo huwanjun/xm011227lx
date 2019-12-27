@@ -1,5 +1,6 @@
 package com.bawei.xm011227lx.model;
 
+import com.android.volley.toolbox.StringRequest;
 import com.bawei.xm011227lx.contract.IHomeContract;
 import com.bawei.xm011227lx.model.bean.Bean;
 import com.bawei.xm011227lx.model.bean.FBean;
@@ -14,7 +15,9 @@ import com.google.gson.Gson;
 public class HomeModel implements IHomeContract.IModel {
     @Override
     public void getHomeData(String keyword, final IModelCallback iModelCallback) {
-        NetUtil.getInstance().getJsonGet(keyword, new NetUtil.MyCallback() {
+
+        String httpUrl="http://172.17.8.100/small/commodity/v1/bannerShow";
+        NetUtil.getInstance().getJsonGet(httpUrl, new NetUtil.MyCallback() {
             @Override
             public void onSuccess(String json) {
                 Bean bean = new Gson().fromJson(json, Bean.class);

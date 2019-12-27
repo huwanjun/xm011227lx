@@ -3,6 +3,7 @@ package com.bawei.xm011227lx.netutil;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -12,6 +13,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bawei.xm011227lx.App;
+import com.bawei.xm011227lx.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Map;
 
@@ -92,6 +98,18 @@ public class NetUtil {
         };
         requestQueue.add(stringRequest);
 
+    }
+
+    public void getPhoto(String photourl, ImageView imageView){
+
+        Glide.with(imageView).load(photourl)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher_round)
+                //缓存路劲
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //圆角图片
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(80)))
+                .into(imageView);
     }
 
     public interface MyCallback{
